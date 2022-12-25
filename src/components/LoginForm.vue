@@ -7,17 +7,22 @@
 </template>
 <script>
 import { ref } from "vue";
+import useLogin from "../composables/useLogin";
 export default {
   name: "SingupForm",
   setup() {
     const email = ref("");
     const password = ref("");
+    const { error, login } = useLogin();
 
-    const handleSubmit = () => {
-      console.log(email.value, password.value);
+    const handleSubmit = async () => {
+      await login(email.value, password.value);
+      if (!error.value) {
+        console.log("user logged in");
+      }
     };
 
-    return { email, password, handleSubmit };
+    return { email, password, handleSubmit, error };
   },
 };
 </script>

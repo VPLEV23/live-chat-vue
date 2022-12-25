@@ -1,5 +1,7 @@
 import firebase from "firebase/app";
 import "firebase/firestore";
+import "firebase/auth";
+
 const firebaseConfig = {
   apiKey: "AIzaSyDN9MO_NSwj_9V-oFAiIBpBpG9HvnJ5rk8",
   authDomain: "live-chat-378cb.firebaseapp.com",
@@ -12,7 +14,9 @@ const firebaseConfig = {
 
 // init firebase
 firebase.initializeApp(firebaseConfig);
+
 const projectFireStore = firebase.firestore();
 const timeStamp = firebase.firestore.FieldValue.serverTimestamp;
+const projectAuth = firebase.auth();
 
-export { projectFireStore, timeStamp };
+export { projectFireStore, timeStamp, projectAuth };

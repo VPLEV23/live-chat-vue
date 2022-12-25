@@ -1,12 +1,26 @@
 <template>
   <div class="welcome container">
     <p>Welcome</p>
-    <SingupForm />
-    <LoginForm />
+    <div v-if="showLogin">
+      <h2>Login</h2>
+      <LoginForm />
+      <p>
+        Not account yet? <span @click="showLogin = flase">SignUp</span> instead
+      </p>
+    </div>
+    <div v-else>
+      <h2>Sign Up</h2>
+      <SingupForm />
+      <p>
+        Already have an account?
+        <span @click="showLogin = true">Login</span>
+      </p>
+    </div>
   </div>
 </template>
 
 <script>
+import { ref } from "vue";
 import SingupForm from "../components/SingupForm.vue";
 import LoginForm from "../components/LoginForm.vue";
 export default {
@@ -14,6 +28,11 @@ export default {
   components: {
     SingupForm,
     LoginForm,
+  },
+  setup() {
+    const showLogin = ref(true);
+
+    return { showLogin };
   },
 };
 </script>
@@ -39,5 +58,13 @@ export default {
   outline: none;
   color: #999;
   margin: 10px auto;
+}
+.welcome span {
+  cursor: pointer;
+  font-weight: bold;
+  text-decoration: underline;
+}
+.welcome button {
+  margin: 20px auto;
 }
 </style>
