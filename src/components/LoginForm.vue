@@ -10,7 +10,7 @@ import { ref } from "vue";
 import useLogin from "../composables/useLogin";
 export default {
   name: "SingupForm",
-  setup() {
+  setup(props, context) {
     const email = ref("");
     const password = ref("");
     const { error, login } = useLogin();
@@ -18,7 +18,7 @@ export default {
     const handleSubmit = async () => {
       await login(email.value, password.value);
       if (!error.value) {
-        console.log("user logged in");
+        context.emit("login");
       }
     };
 
